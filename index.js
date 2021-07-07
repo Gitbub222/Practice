@@ -1,14 +1,23 @@
-const EventEmitter = require('events');
-const areaCalc = require('./helper');
+// const _ = require('lodash');
+// const tf = require('@tensorflow/tfjs');
+// const fetch = require("node-fetch")
+// require('@tensorflow/tfjs-node');
 
-const eventEmitter = new EventEmitter();
+const express = require('express');
+const app = express();
 
-const fullname = "Baraka Mulungula"
+app.get('/', (req, res)=>{
+    res.send("<h1 style='text-align: center;' >Hello, World!</h1>")
+});
 
-eventEmitter.on('touch', () => {
-    console.log(`Event touched by ${fullname}!` )
+app.get('/dashboard', (req, res)=>{
+    res.send("My Dashboard")
 })
 
-eventEmitter.emit("touch")
+app.get('/dashboard/:uuid/:name', (req, res)=>{
+    const {uuid, name} = req.params;
+    res.send(`UUID: ${uuid}<br> Name: ${name}`)
+})
 
 
+app.listen(3000)
